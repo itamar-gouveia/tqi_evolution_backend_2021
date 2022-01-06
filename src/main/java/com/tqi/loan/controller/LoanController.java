@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tqi.loan.models.Client;
-import com.tqi.loan.repository.ClientController;
+import com.tqi.loan.repository.ClientRepository;
 
 @RestController
 @RequestMapping(value="/loans")
@@ -27,7 +27,7 @@ public class LoanController {
     LoanRepository loanRepository;
 
     @Autowired
-    ClientController customerRepository;
+    ClientRepository customerRepository;
 
 
     @GetMapping("/todos")
