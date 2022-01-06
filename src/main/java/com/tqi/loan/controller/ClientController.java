@@ -1,67 +1,54 @@
 package com.tqi.loan.controller;
 
-import java.util.List;
-
 import com.tqi.loan.models.Client;
-import com.tqi.loan.repository.ClientRepository;
+import com.tqi.loan.requests.ClientPostRequestBody;
+import com.tqi.loan.requests.ClientPutRequestBody;
+import com.tqi.loan.service.ClientService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/clients")
 public class ClientController {
 	
 	@Autowired
-	ClientRepository clientRepository;
-	
+	ClientService clientService;
+
 	@GetMapping("/all")
-	@ApiOperation(value="List all clients")
-	@ApiResponses({
-			@ApiResponse(code= 200, message= "List all clients successfully "),
-			@ApiResponse(code= 401, message= "Authentication failed")
-
-	})
-	public List<Client> listclients(){
-		return clientRepository.findAll();
+	@ApiOperation(value = "List all Clients")
+	public ResponseEntity<List<Client>> list(){
+		return ResponseEntity.ok(clientService.listAll());
 	}
-	
-	@GetMapping("/{id}")
-	@ApiOperation(value="List client by Id")
-	public Client listClientId(@PathVariable  Long id) {
-		return clientRepository.findById(id).get();
-		}
 
+	@GetMapping("/{id}")
+	@ApiOperation(value = "Find client by Id")
+	public ResponseEntity<Client> findById(@PathVariable long id){
+		return ResponseEntity.ok(clientService.findById(id));
+	}
 
 	@PostMapping("/new")
-	@ApiOperation(value="Save a new client")
-	public Client salveClient(@RequestBody Client client) {
-		return clientRepository.save(client);
-		
+	@ApiOperation(value="Save new Client")
+	public ResponseEntity<Client> save(@RequestBody ClientPostRequestBody clientPostRequestBody){
+		return  new ResponseEntity<>(clientService.save(clientPostRequestBody), HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/update")
-	@ApiOperation(value="Update data of client")
-	public Client updateClient(@RequestBody Client client) {
-		return clientRepository.save(client);
-		
+	@ApiOperation(value="Update existing Client")
+	public ResponseEntity<Void> update(@RequestBody ClientPutRequestBody clientPutRequestBody){
+		clientService.update(clientPutRequestBody);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	
-	@DeleteMapping("/{id}")
-	@ApiOperation(value="Delete client by id")
-	public void deletarCliente(@PathVariable Long id) {
-		clientRepository.deleteById(id);
-		
+	@DeleteMapping("/delete/{id}")
+	@ApiOperation(value="Delete existing Client")
+	public ResponseEntity<Void> delete(@PathVariable long id){
+		clientService.delete(id);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	
-	
 }	
