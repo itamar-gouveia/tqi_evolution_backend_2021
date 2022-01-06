@@ -4,14 +4,22 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
 public class ClientPostRequestBody {
 
+    @NotEmpty(message="The field name connot be empty")
+    @NotNull(message="The field name connot be null")
     private String name;
 
+    @NotEmpty(message="The field name connot be empty")
+    @NotNull(message="The field name connot be null")
+    @Email(message = "this email is not valid")
     private String email;
 
     private String cpf;

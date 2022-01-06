@@ -1,5 +1,6 @@
 package com.tqi.loan.service;
 
+import com.tqi.loan.exception.BadRequestException;
 import com.tqi.loan.models.Client;
 import com.tqi.loan.repository.ClientRepository;
 import com.tqi.loan.requests.ClientPostRequestBody;
@@ -23,7 +24,7 @@ public class ClientService {
 
         public Client findById(long id){
             return clientRepository.findById(id)
-                    .orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cliente not Found"));
+                    .orElseThrow(()-> new BadRequestException("Cliente not Found"));
         }
 
         public Client save(ClientPostRequestBody clientPostRequestBody){
