@@ -6,6 +6,8 @@ import com.tqi.loan.repository.ClientRepository;
 import com.tqi.loan.requests.ClientPostRequestBody;
 import com.tqi.loan.requests.ClientPutRequestBody;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,8 +21,8 @@ public class ClientService {
 
         private final ClientRepository clientRepository;
 
-        public List<Client> listAll(){
-            return clientRepository.findAll();
+        public Page<Client> listAll(Pageable pageable){
+            return clientRepository.findAll(pageable);
         }
 
         public Client findById(long id){
