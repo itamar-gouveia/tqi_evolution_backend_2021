@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -26,6 +27,7 @@ public class ClientService {
             return clientRepository.findById(id)
                     .orElseThrow(()-> new BadRequestException("Cliente not Found"));
         }
+
 
         public Client save(ClientPostRequestBody clientPostRequestBody){
             Client client =  Client.builder()
@@ -44,6 +46,7 @@ public class ClientService {
                     .zipCode(clientPostRequestBody.getZipCode())
                     .build();
             return clientRepository.save(client);
+
         }
 
         public void delete(long id){

@@ -42,17 +42,14 @@ public class LoanController {
     }
 
     @PostMapping("/new/{id}")
-    public Loan saveLoan(@PathVariable Long id , @RequestBody Loan loan) {
-        Optional<Client> customer =  customerRepository.findById(id);  //peda o id do cliente
-        loan.setCliente(customer.get().getId());  //seta o cliente pelo id
-        loan.setDataSolicitacao(LocalDate.now()); //seta a data de solicitacao para o dia
-        loan.setDataPrimeiraParcela(LocalDate.now().plusMonths(2)); //coloca a data da primeira parcela para 2 meses apos o pedido
-        return loanRepository.save(loan); //salva o emprestimo no banco de dados
+    public String saveLoan(@PathVariable Long id , @RequestBody Loan loan) {
+
+        return "jflafjd";
     }
 
     @PutMapping("/aprprove")
     public Loan approveLoan(@RequestBody Loan loan) {
-            loan.setStatus("A");
+
             return loanRepository.save(loan);
 
 
