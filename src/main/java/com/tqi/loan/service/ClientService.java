@@ -27,7 +27,7 @@ public class ClientService {
 
         public Client findById(long id){
             return clientRepository.findById(id)
-                    .orElseThrow(()-> new BadRequestException("Cliente not Found"));
+                    .orElseThrow(()-> new BadRequestException("Client not Found"));
         }
 
 

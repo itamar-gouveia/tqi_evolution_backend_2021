@@ -38,6 +38,7 @@ modelagem de suas entidades, em uma api de gerenciamento de empréstimos.</p>
     <li><strong>Hibernate Validator</strong></li>
     <li>Lombok</li>
     <li>Postman</li>
+    <li>Heroku</li>
 </ul>
 
 
@@ -87,7 +88,13 @@ Indica qual é o lado inverso ou não dominante da relação.
 
 </ul>
 
+<h2>📦 Testanto API</h2>
+Você pode ver a API em funcionamento no seguinte link
+https://tqi-backend-2021.herokuapp.com/swagger-ui/
 
+
+<h2>📜 Licença</h2>
+Esta API está sobre a licença <a href="https://opensource.org/licenses/MIT">MIT</a>
 <h2> 🤝 Contribuindo </h2>
 
 Este repositório foi criado para fins de estudo, então contribua com ele. Se te ajudei de alguma forma, ficarei feliz em
