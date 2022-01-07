@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -42,6 +43,7 @@ public class ClientPutRequestBody {
 
     private String zipCode;
 
+    @Size(min = 2, max = 2)
     private String state;
 
     private BigDecimal income;
@@ -49,5 +51,5 @@ public class ClientPutRequestBody {
     private String password;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate registerDate = LocalDate.now();
+    private LocalDate registerDate;
 }

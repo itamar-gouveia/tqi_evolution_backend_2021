@@ -2,16 +2,10 @@ package com.tqi.loan.requests;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -27,9 +21,10 @@ public class LoanPostRequestBody {
     private LocalDate firstPaymentDate;
 
  
- 
+
     private BigDecimal amount;
 
+    @Range(min=1 , max =60, message = "Parcels cannot be greater than 60")
     private Integer qtdPayments;
 
     private Long client;  //id do cliente
